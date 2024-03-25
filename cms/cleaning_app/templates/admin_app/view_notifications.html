@@ -1,0 +1,23 @@
+{% extends 'admin_app/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Notifications</div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for notification in notifications %}
+                            <li class="list-group-item">{{ notification.date }} - {{ notification.description }}</li>
+                        {% empty %}
+                            <li class="list-group-item">No notifications available</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

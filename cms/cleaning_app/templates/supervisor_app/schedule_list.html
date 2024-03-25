@@ -1,0 +1,40 @@
+{% extends 'supervisor_app/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center"> Cleaning Schedule</h2>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              {% for schedule in schedules %}
+              <div class="col-md-6 mb-4">
+                <div class="card h-100" style="border: 2px solid #007bff; border-radius: 10px;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ schedule.scheduled_date }} - {{ schedule.area_building }}</h5>
+                    <p class="card-text">Task: {{ schedule.task }}</p>
+                    <p class="card-text">Assigned User: {{ schedule.assigned_user.username }}</p>
+                    <p class="card-text">Status: 
+                      <span class="{% if schedule.status == 'complete' %}text-success{% else %}text-danger{% endif %}">
+                        {{ schedule.status }}
+                      </span>
+                    </p>
+                    {% if schedule.status == 'complete' %}
+                    <p class="card-text">Completed Date: {{ schedule.completed_date }}</p>
+                    <p class="card-text">Completed Time: {{ schedule.completed_time }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

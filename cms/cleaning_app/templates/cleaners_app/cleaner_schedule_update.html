@@ -1,0 +1,31 @@
+{% extends 'cleaners_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Update Task</h2>
+          <form method="post" action="" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+              {{ form.status|as_crispy_field }}
+            </div>
+            <div class="mb-3">
+              {{ form.completed_date|as_crispy_field }}
+            </div>
+            <div class="mb-3">
+              {{ form.completed_time|as_crispy_field }}
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-block">Update Schedule</button>
+              <a href="{% url 'cleaner_schedule_view' %}" class="btn btn-secondary btn-block mt-3">Back to Schedule View</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
