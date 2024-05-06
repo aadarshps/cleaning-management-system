@@ -43,7 +43,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-SELECTROLE = ((1, "admin"), (2, "supervisor"), (3, "cleners"))
+SELECTROLE = ((1, "admin"), (2, "supervisor"), (3, "cleners"),(4,"customer"))
 
 class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -72,6 +72,7 @@ class UserProfile(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length = 25,blank=True, null=True)
     mobile_number = models.CharField(max_length=25,unique=True, null=True)
+    image = models.ImageField(upload_to='profile',blank=True, null=True)
 
 class CleaningSchedule(models.Model):
     Task_CHOICES = [
@@ -120,3 +121,37 @@ class Feedback(BaseModel):
 
     def __str__(self):
         return f"Feedback for {self.cleaner.username} - {self.date_of_feedback}"
+    
+
+##########################Modified##############################
+LOCATION_CHOICES = [('Chottanikkara', 'Chottanikkara'),('Vyttila', 'Vyttila'),('Edappally', 'Edappally'),
+                    ('Kaloor','Kaloor'),('High Court','High Court')]
+class CustomerFlat(BaseModel):
+    """
+    Represents customer flat details.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    flat_number = models.CharField(max_length=20)
+    floor = models.PositiveIntegerField()
+    building_name = models.CharField(max_length=100)
+    address = models.TextField()
+    location = models.CharField(max_length=25,choices=LOCATION_CHOICES)
+
+class CleaningPackage(BaseModel):
+    """
+    Represents different cleaning packages available for flats.
+    """
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField()
+    price = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name
+
+class CleaningRequests(BaseModel):
+    package = models.ForeignKey(CleaningPackage,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    date = models.DateField()
+    status=models.CharField(max_length=50,default='pending')
+    cleaner = models.ForeignKey(User, limit_choices_to={'role': 3},on_delete=models.CASCADE,related_name='cleaner_requests',null=True)
+

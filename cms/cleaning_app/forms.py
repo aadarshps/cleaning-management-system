@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 from cleaning_app.models import *
 
@@ -73,3 +74,62 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ['cleaner', 'work_quality', 'date_of_feedback']
+
+
+#############################################################Modified############################################
+class CustomerFlatForm(forms.ModelForm):
+    class Meta:
+        model = CustomerFlat
+        fields = ['location','building_name','floor','flat_number','address']
+
+    def clean_flat_number(self):
+        """
+        Custom validation to ensure flat_number is unique.
+        """
+        flat_number = self.cleaned_data.get('flat_number')
+        if CustomerFlat.objects.filter(flat_number=flat_number).exists():
+            raise forms.ValidationError("This flat number is already in use.")
+        return flat_number
+
+class CleaningPackageForm(forms.ModelForm):
+    class Meta:
+        model = CleaningPackage
+        fields = ['name','description','price']
+
+class CleanersForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['name', 'mobile_number','image']
+
+class CleaningRequestsForm(forms.ModelForm):
+    date = forms.DateField(widget=DateInput)
+    class Meta:
+        model = CleaningRequests
+        fields = ['package','date']
+    
+    def clean_date(self):
+        """
+        Custom validation to ensure the date is not in the past.
+        """
+        cleaned_date = self.cleaned_data.get('date')
+        if cleaned_date < timezone.now().date():
+            raise forms.ValidationError("Date cannot be in the past.")
+        return cleaned_date
+    
+class AssignCleaningForm(forms.ModelForm):
+    class Meta:
+        model = CleaningRequests
+        fields = ['cleaner']
+
+STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+        ('completed', 'Completed'),
+    ]
+
+class UpdateCleaningForm(forms.ModelForm):
+    status = forms.ChoiceField(choices=STATUS_CHOICES, widget=forms.Select)
+    class Meta:
+        model = CleaningRequests
+        fields = ['status']

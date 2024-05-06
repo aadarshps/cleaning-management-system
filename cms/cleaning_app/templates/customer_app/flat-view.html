@@ -1,0 +1,31 @@
+{% extends 'customer_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Your Flat Detials</h3>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Building</th>
+                <th scope="col">Flat Number</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Address</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+              <tr>
+                <th scope="row">{{i.building_name}}</th>
+                <td>{{i.flat_number}}</td>
+                <td>{{i.floor}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.location}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

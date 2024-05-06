@@ -1,0 +1,35 @@
+{% extends 'admin_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Cleaners Work Report</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Package</th>
+                    <th scope="col">Package Price</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Scheduled Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned Cleaner</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{i.package}}</td>
+                    <td>{{i.package.price}}</td>
+                    <td>{{i.user}}</td>
+                    <td>{{i.date}}</td>
+                    <td>{{i.status}}</td>
+                    <td>{{i.cleaner}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

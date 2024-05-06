@@ -1,0 +1,33 @@
+{% extends 'customer_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Cleaners</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mobile_No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in c_data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><img src="{{i.image.url}}" height="40px"></td>
+                    <td>{{i.user.username}}</td>
+                    <td>{{i.user.email}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.mobile_number}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

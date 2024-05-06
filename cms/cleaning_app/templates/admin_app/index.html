@@ -20,7 +20,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon/paws.ico' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon/icons.ico' %}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -76,8 +76,8 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme " >
     
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
-              <h4 style="color: black;"><b>CMS</b></h4>
+            <a href="{% url 'admin_home' %}" class="app-brand-link">
+              <img src="{% static 'assets/img/backgrounds/Beaclenz.png' %}" width="115px">
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -92,7 +92,7 @@
             <li class="menu-item active">
               <a href="" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Admin Dashboard</div>
               </a>
             </li>
 
@@ -119,7 +119,7 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
-                <div data-i18n="Account Settings">cleners</div>
+                <div data-i18n="Account Settings">cleaners</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
@@ -129,6 +129,64 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Account Settings">Customers</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{% url 'customer-view-admin' %}" class="menu-link">
+                    <div data-i18n="Account">View</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Account Settings">Customer Flat Detials</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{% url 'flat-view-admin' %}" class="menu-link">
+                    <div data-i18n="Account">View</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Account Settings">Cleaning Packages</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{% url 'package-add' %}" class="menu-link">
+                    <div data-i18n="Account">Add</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="{% url 'package-view' %}" class="menu-link">
+                    <div data-i18n="Account">View</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-cube-alt"></i>
+                <div data-i18n="Account Settings">Cleaners Work Report</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{% url 'cleaners-report' %}" class="menu-link">
+                    <div data-i18n="Account">View</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
@@ -212,7 +270,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="{% static 'javascript:void(0);' %}" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="{% static 'assets/img/avatars/user.png' %}" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="{% static 'assets/img/avatars/adminicon.png' %}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -221,7 +279,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="{% static 'assets/img/avatars/user.png' %}" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="{% static 'assets/img/avatars/adminicon.png' %}" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -230,14 +288,6 @@
                           </div>
                         </div>
                       </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                   
-                   
-                    <li>
-                   
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>

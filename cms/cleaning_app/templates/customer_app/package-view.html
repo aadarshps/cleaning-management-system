@@ -1,0 +1,17 @@
+{% extends 'customer_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    {% for i in data %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"  style="font-weight: bold;">{{ i.name }}</h5>
+                <p class="card-text">{{ i.description }}</p>
+                <p class="card-text text-primary">Rs.{{i.price}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'customer_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Cleaning Requests</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Package</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{i.package}}</td>
+                    <td>{{i.date}}</td>
+                    <td>
+                        {% if i.status == 'pending' %}
+                        <span class="text-danger">Pending</span>
+                        {% elif i.status == 'Approved' %}
+                        <span class="text-success">Approved</span>
+                        {% elif i.status == 'Rejected' %}
+                        <span class="text-danger">Rejected</span>
+                        {% elif i.status == 'completed' %}
+                        <span class="text-primary">Completed</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

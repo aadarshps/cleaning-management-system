@@ -1,0 +1,27 @@
+{% extends 'admin_app/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Cleaning Packages</h3>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Package</th>
+                <th scope="col">About</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+              <tr>
+                <th scope="row">{{i.name}}</th>
+                <td>{{i.description}}</td>
+                <td>Rs.{{i.price}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
